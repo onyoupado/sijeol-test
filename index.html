@@ -75,6 +75,7 @@ ol.path li{position:relative;padding:0 0 12px 16px;font-size:15px}
 ol.path li::before{content:"";position:absolute;left:-6px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--night);border:2px solid var(--paper)}
 ol.path li:last-child::before{background:var(--seal);border-color:var(--seal)}
 ol.path span{display:block;font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+.quote{font-family:var(--disp);font-weight:500;font-size:19px;line-height:1.55;margin:0;padding-left:14px;border-left:3px solid var(--seal);text-wrap:balance}
 .toast{font-size:14px;color:var(--paper);min-height:1.4em}
 @media (prefers-reduced-motion:reduce){.bar i{transition:none}}
 </style>
@@ -159,6 +160,43 @@ const TOTAL=COMMON.length+5+1;
 // 동지(협력 유형은 한패)·천적: 유형코드:동지,천적
 const PAIR=Object.fromEntries('RAD:RFD,CAD RAO:MAO,CAO RAI:RSI,CWI RWD:MWI,CWD RWO:RSO,CSO RWI:RWD,CSI RFD:RSD,CSD RFO:RSO,CFO RFI:MFD,CFI RSD:RFD,CAD RSO:RFO,CSO RSI:RAI,CSI MAD:RSD,CAI MAO:RAO,CAO MAI:MFI,CSD MWD:MSD,CWO MWO:RWO,CWI MWI:RWI,CSI MFD:RFI,CFD MFO:MSO,CAI MFI:MAI,CSD MSD:MWD,CAD MSO:MFO,CSO MSI:MFI,CSD CAD:CSD,RAD CAO:CFO,RAO CAI:CFI,MAD CWD:CWO,RWD CWO:CWD,MWD CWI:CSI,RAI CFD:CSI,RFD CFO:CAO,RFO CFI:CAI,RFI CSD:CAD,RSD CSO:CAD,RSO CSI:CFD,RSI'.split(' ').map(s=>{const[k,v]=s.split(':');return[k,v.split(',')]}));
 const tOf=c=>T.find(x=>x[0]==c);
+const LINE=Object.fromEntries(`RAD|종로에서 봅시다. 아, 나는 좀 시끄럽게 나타날 거요.
+RAO|산이 내 집이고 감자가 내 밥이오. 그래도 지도는 내가 제일 잘 읽소.
+RAI|선생님, 오늘 출석은 교문 밖에서 불러 주시지요.
+RWD|원고료는 없어도 괜찮소. 검열관이 누구보다 꼼꼼히 읽어 주니까.
+RWO|마감은 상하이 시간으로 하겠소. 배달은… 몰래.
+RWI|사진이 좀 흐리게 나왔군. 내가 손 좀 봤소.
+RFD|이건 그냥 쌀가마요. 무게는 묻지 마시오.
+RFO|사탕수수밭에서 번 돈이니, 고국엔 달게 쓰이길.
+RFI|이 무명은 조선 목화로 짰소. 질기기가 우리 고집만 하오.
+RSD|나는 아무것도 모르오. 모른다는 것까지 잘 외워 뒀소.
+RSO|통역은 필요 없소. 조선의 사정은 다섯 나라 말로 준비해 왔소.
+RSI|생각은 달라도 회의록은 하나로 씁시다.
+MAD|장 보러 왔을 뿐인데… 목청이 절로 터지더라고.
+MAO|여기 땅은 얼어도 사람 인심은 안 얼었소.
+MAI|산이 나를 숨겨 주니, 나도 산에 의리는 지키오.
+MWD|울지 마시오. 노래가 대신 울어 줄 테니.
+MWO|모자는 도쿄에서 샀지만 머리는 조선 거요.
+MWI|쓴 건 열 줄, 실린 건 두 줄. 나머지는 독자 상상에 맡기오.
+MFD|정치는 모르오. 다만 북촌 장사는 북촌 사람이 해야지.
+MFO|다리 건너면 값이 두 배, 소문은 세 배요.
+MFI|도장은 내가 찍지만, 마음까지 찍히진 않았소.
+MSD|커피는 쓰고 소문은 달지요. 둘 다 리필은 안 되오.
+MSO|나는 말만 옮겼소. 표정은 각자 알아서 읽으시오.
+MSI|신고서요? 아, 마침 붓이 말라서… 내일 쓰지요.
+CAD|승진 서류는 두꺼운데, 밤잠은 자꾸 얇아지오.
+CAO|제복은 번쩍이는데, 고향에 보낼 편지엔 쓸 말이 없소.
+CAI|칼은 헌병이 차고, 욕은 내가 먹소.
+CWD|붓은 내 것인데 그림은 남의 것이 되었구려.
+CWO|박수는 받는데, 왜 자꾸 고향 무대가 그리운지.
+CWI|가라고 외치는 건 나요. 정작 나는 안 가오.
+CFD|비행기는 바쳤는데, 이름이 오래 남게 됐소. 그게 문제지.
+CFO|전쟁은 남의 일, 장부는 내 일이오.
+CFI|소작료도 내가 걷고, 원망도 내가 걷소.
+CSD|옆집 숟가락 개수는 아는데, 우리 집 건 모르오.
+CSO|동지들, 오늘 모임 장소가 어디라 했소? 아니, 그냥 궁금해서.
+CSI|자문은 했는데, 아무도 내 말을 묻진 않았소.`.split('\n').map(s=>s.split('|')));
+
 const SITE=/^https?:$/.test(location.protocol)?(location.host+location.pathname).replace(/index\.html$/,'').replace(/\/$/,''):'';
 
 const app=document.getElementById('app');
@@ -222,6 +260,7 @@ async function result(){
   const [ally,foe]=PAIR[code].map(tOf),allyL=code[0]=='C'?'한패':'동지';
   let py0=0;const path=hist.slice(0,TOTAL-1).map((x,i)=>{const m=(x.q[0]||'').match(/\d{4}/);if(m)py0=+m[0];return [x.q[0],x.q[2][x.i][0],py0,i]}).sort((a,b)=>a[2]-b[2]||a[3]-b[3]);
   app.innerHTML=`<p class="eyebrow">기록 결과 · ${ST[st]} · ${MO[code[1]]} · ${AR[code[2]]}</p>
+  <p class="quote">“${LINE[code]}”</p>
   <div class="res"><img id="shot" alt="${esc(t[2])} 결과 카드"></div>
   <div class="row"><button class="btn" id="share" hidden>스토리로 공유</button><button class="btn" id="save" hidden>이미지 저장</button></div>
   <div class="row"><button class="btn ghost" id="copy">결과 문구 복사</button><button class="btn ghost" id="link">테스트 링크 복사</button></div>
@@ -239,7 +278,7 @@ async function result(){
   document.getElementById('again').onclick=intro;
   const msg=document.getElementById('msg');
   document.getElementById('copy').onclick=async()=>{
-    const txt=`그 시절 나는 「${t[2]}」(${ST[st]}·${MO[code[1]]}·${AR[code[2]]})\n${t[3]}\n${allyL}: ${ally[2]} / 천적: ${foe[2]}\n기록: ${t[4]}`;
+    const txt=`그 시절 나는 「${t[2]}」(${ST[st]}·${MO[code[1]]}·${AR[code[2]]})\n“${LINE[code]}”\n${t[3]}\n${allyL}: ${ally[2]} / 천적: ${foe[2]}\n기록: ${t[4]}`;
     try{await navigator.clipboard.writeText(txt);msg.textContent='결과 문구를 복사했어요.'}catch(e){msg.textContent=txt}
   };
   const blob=await draw(t,code,ally,foe,allyL);
@@ -360,8 +399,8 @@ async function draw(t,code,ally,foe,allyL){
   c.fillRect(L,y0+122,TW,2);
   // 일러스트
   const n=(f,s,mw,mx)=>{c.font=f;return Math.min(split(c,s,mw).length,mx)};
-  const spare=(2-n(`900 70px ${D}`,t[2],TW-40,2))*84+(3-n(`400 34px ${B}`,t[3],TW,3))*52+(3-n(`400 29px ${B}`,t[4],TW,3))*44;
-  const py=y0+150,ph=Math.min(440+spare,640);scene(c,L,py,TW,ph,code,k);
+  const spare=(2-n(`900 70px ${D}`,t[2],TW-40,2))*84+(3-n(`400 34px ${B}`,t[3],TW,3))*52+(3-n(`400 29px ${B}`,t[4],TW,3))*44+(2-n(`700 32px ${B}`,`“${LINE[code]}”`,TW,2))*46;
+  const py=y0+150,ph=Math.min(320+spare,600);scene(c,L,py,TW,ph,code,k);
   c.fillStyle=k.paper;c.fillRect(R-118,py+18,100,100);c.strokeStyle=pink;c.lineWidth=3;c.strokeRect(R-118,py+18,100,100);
   c.fillStyle=pink;c.textAlign='center';c.font=`900 72px ${D}`;c.fillText(t[1],R-68,py+94);
   c.save();c.translate(R-140,py+ph-6);c.rotate(-0.17);c.strokeStyle=k.seal;c.fillStyle=k.seal;c.globalAlpha=.9;
@@ -372,7 +411,8 @@ async function draw(t,code,ally,foe,allyL){
   c.textAlign='left';c.fillStyle=pink;c.font=`900 70px ${D}`;
   let y=wrap(c,t[2],L,py+ph+100,TW-40,84,2);
   c.font=`400 30px ${B}`;c.globalAlpha=.75;c.fillText(`${name||'무명씨'} · ${ST[code[0]]} · ${MO[code[1]]} · ${AR[code[2]]}`,L,y-14);c.globalAlpha=1;
-  c.font=`400 34px ${B}`;y=wrap(c,t[3],L,y+52,TW,52,3);
+  c.font=`700 32px ${B}`;c.fillStyle=k.seal;y=wrap(c,`“${LINE[code]}”`,L,y+54,TW,46,2);
+  c.fillStyle=pink;c.font=`400 34px ${B}`;y=wrap(c,t[3],L,y+22,TW,52,3);
   y+=4;c.fillRect(L,y-20,TW,2);
   [[allyL,ally[2],pink],['천적',foe[2],k.seal]].forEach(([lb,nm,col],i)=>{const yy=y+34+i*54;
     c.fillStyle=col;c.font=`700 28px ${B}`;c.fillText(lb,L,yy);c.fillStyle=pink;c.font=`700 34px ${B}`;c.fillText(nm,L+100,yy)});

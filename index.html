@@ -169,10 +169,12 @@ function intro(){
   app.innerHTML=`<p class="eyebrow">1910 — 1945 · 성향 테스트</p>
   <canvas class="hero" id="hero" width="1040" height="440" aria-hidden="true"></canvas>
   <h1>그 시절,<br>나는 누구였을까</h1>
-  <p class="lead">실제 기록에 남은 장면 앞에서 고르다 보면 길이 갈라져요. 제1부의 선택이 제2부에서 만날 장면을 바꾸고, 마지막 갈림길에서 일제강점기를 산 사람들 36가지 얼굴 가운데 하나가 정해져요. 모두 ${TOTAL}문항이고, 결과는 인스타 스토리 크기 이미지로 저장할 수 있어요.</p>
+  <p class="lead">1910년부터 1945년까지, 이 땅의 사람들은 날마다 크고 작은 선택 앞에 섰어요. 만세를 부를지 못 본 척할지, 이름을 지킬지 내줄지. 대부분은 영웅도 악인도 아니었고, 그날그날을 살아 내려 애쓴 보통 사람이었어요.</p>
+  <p class="lead">이 테스트는 누가 더 나은 사람인지 가리거나 자랑하려는 것이 아니에요. 앞선 시대를 살아간 사람들의 삶을 이해하고, 같은 장면 앞에서 나는 무엇을 지키려 했을지 헤아려 보며, 지금 내 삶의 태도를 조용히 돌아보는 자리예요.</p>
+  <p class="meta">기록에 남은 장면 ${TOTAL}개 · 고른 길에 따라 다음 장면이 달라져요 · 결과는 인스타 스토리 크기 이미지로 저장할 수 있어요</p>
   <label class="f" for="nm">기록카드에 적을 이름 (비워 두면 무명씨)<input type="text" id="nm" maxlength="8" placeholder="예: 홍길동"></label>
   <button class="btn" id="go">기록 시작</button>
-  <p class="note">재미로 보는 테스트예요. 실존 인물이나 그 후손에 대한 평가가 아니고, 결과가 그 사람의 됨됨이를 말하지도 않아요.</p>`;
+  <p class="note">결과는 정답도 판정도 아니에요. 실존 인물이나 그 후손에 대한 평가가 아니고, 지금의 나를 비춰 보는 하나의 거울일 뿐이에요.</p>`;
   const hc=document.getElementById('hero');scene(hc.getContext('2d'),0,0,1040,440,'RAD',cols());
   document.getElementById('go').onclick=()=>{name=document.getElementById('nm').value.trim();hist=[];qi=0;finalQ=null;ask()};
 }
@@ -378,7 +380,7 @@ async function draw(t,code,ally,foe,allyL){
   c.font=`700 28px ${B}`;c.fillStyle=k.seal;c.fillText('그 시절 기록',L,y+48);
   c.fillStyle=pink;c.font=`400 29px ${B}`;wrap(c,t[4],L,y+94,TW,44,3);
   c.textAlign='center';c.fillStyle=k.dim;c.font=`400 30px ${B}`;c.fillText(SITE?`나도 해보기 · ${SITE}`:'나도 해보기',W/2,1800);
-  c.font=`400 24px ${B}`;c.fillText('재미로 보는 테스트 · 실존 인물에 대한 평가가 아니에요',W/2,1872);
+  c.font=`400 24px ${B}`;c.fillText('정답도 판정도 아닌, 나를 돌아보는 테스트예요',W/2,1872);
   return new Promise(r=>cv.toBlob(b=>{if(imgURL)URL.revokeObjectURL(imgURL);imgURL=URL.createObjectURL(b);r(b)},'image/png'));
 }
 intro();

@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>그 시절, 나는 누구였을까</title>
+<meta name="description" content="1910–1945, 실제 기록에 남은 장면 앞에서 고르다 보면 일제강점기를 산 사람들 36가지 얼굴 가운데 하나가 나와요.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="그 시절, 나는 누구였을까">
+<meta property="og:description" content="독립운동가부터 밀정까지, 일제강점기 36가지 인물 유형 테스트">
+<!-- 아래 주소의 아이디와 저장소 이름을 내 것으로 바꾸세요 -->
+<meta property="og:image" content="https://아이디.github.io/저장소이름/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;900&family=Gowun+Batang:wght@400;700&display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0}
+[hidden]{display:none!important}
+/* 레이아웃: 밤의 경성(짙은 청회색) 위에 바랜 마분지 기록카드 한 장. 한 화면에 한 문항. */
+:root{
+  --night:#1c2430; --night2:#253041; --paper:#ddcca4; --paper-ink:#2a2620;
+  --ink:#e9e0cb; --dim:#9aa3ad; --seal:#b3332b; --line:#3a475a;
+  --disp:"Noto Serif KR","Nanum Myeongjo",serif; --body:"Gowun Batang","Noto Serif KR",serif;
+  color-scheme:dark;
+}
+html,body{background:var(--night);color:var(--ink)}
+body{font-family:var(--body);font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere;padding:24px 16px 48px}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1{font-family:var(--disp);font-weight:900;font-size:clamp(28px,8vw,40px);line-height:1.25;margin:0;text-wrap:balance}
+.eyebrow{font-size:13px;letter-spacing:.12em;color:var(--dim)}
+p{margin:0}
+.lead{color:var(--ink);opacity:.9}
+.card{background:var(--paper);color:var(--paper-ink);border-radius:3px;padding:22px 20px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--dim)}
+input[type=text]{font:inherit;font-size:17px;padding:12px 14px;border:1px solid var(--line);background:var(--night2);color:var(--ink);border-radius:3px}
+button{font:inherit;cursor:pointer;border-radius:3px}
+.btn{background:var(--seal);color:#fff6ee;border:0;padding:14px 18px;font-size:17px;font-weight:700;font-family:var(--disp)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);font-family:var(--body);font-weight:400;font-size:15px}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
+.meta{font-size:13px;color:var(--dim)}
+/* 문항 */
+.prog{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);font-variant-numeric:tabular-nums}
+.bar{height:3px;background:var(--line)}.bar i{display:block;height:100%;background:var(--seal);transition:width .25s}
+.q .yr{font-family:var(--disp);font-weight:900;color:var(--seal);font-size:15px;letter-spacing:.05em}
+.q h2{font-family:var(--disp);font-weight:500;font-size:21px;line-height:1.5;margin:6px 0 0;text-wrap:balance}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{text-align:left;background:var(--night2);color:var(--ink);border:1px solid var(--line);padding:14px 16px;font-size:16px;line-height:1.5}
+.opt:hover{border-color:var(--paper)}
+/* 결과 */
+.res img{width:100%;max-width:100%;border-radius:4px;display:block;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.row{display:flex;flex-wrap:wrap;gap:10px}.row>*{flex:1 1 150px}
+.axes{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.ax{display:grid;grid-template-columns:56px 1fr 40px;align-items:center;gap:8px;font-variant-numeric:tabular-nums}
+.ax b{font-weight:700}.ax span{height:8px;background:var(--line);position:relative}.ax span i{position:absolute;inset:0 auto 0 0;background:var(--paper)}
+.ax.r span i{background:var(--seal)}
+details{border-top:1px solid var(--line);padding-top:12px}
+summary{cursor:pointer;font-family:var(--disp);font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px;font-size:13px}
+.grid div{background:var(--night2);padding:8px 10px;border-left:3px solid var(--line);min-width:0}
+.grid .R{border-color:var(--seal)}.grid .M{border-color:var(--dim)}.grid .C{border-color:#5b5f66}
+.grid em{font-style:normal;color:var(--dim);display:block;font-size:12px}
+.grid .me{outline:1px solid var(--paper)}
+.note{font-size:13px;color:var(--dim);line-height:1.6}
+.hero{width:100%;max-width:100%;height:auto;display:block;border-radius:3px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pair div{background:var(--night2);padding:12px 14px;border-top:3px solid var(--dim);min-width:0;font-size:14px}
+.pair div.foe{border-color:var(--seal)}
+.pair b{display:block;font-family:var(--disp);font-size:17px;margin:2px 0 4px}
+.pair em{font-style:normal;color:var(--dim);font-size:12px;letter-spacing:.08em}
+h3{font-family:var(--disp);font-weight:500;font-size:18px;margin:0}
+ol.path{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border-left:2px solid var(--line)}
+ol.path li{position:relative;padding:0 0 12px 16px;font-size:15px}
+ol.path li::before{content:"";position:absolute;left:-6px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--night);border:2px solid var(--paper)}
+ol.path li:last-child::before{background:var(--seal);border-color:var(--seal)}
+ol.path span{display:block;font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+.toast{font-size:14px;color:var(--paper);min-height:1.4em}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+const ST={R:'저항',M:'경계',C:'협력'},MO={A:'몸으로',W:'글·예술로',F:'돈·물자로',S:'정보·조직으로'},AR={D:'조선 안',O:'국경 너머',I:'제도 안'};
+const STAMP={R:'要視察',M:'無名氏',C:'反民族'};
+// [코드, 한자, 이름, 설명, 기록]
+const T=[
+['RAD','彈','경성의 의열단원','말보다 행동이 빠르다. 경찰서 앞에서도 망설이지 않고, 쫓기면서도 끝까지 맞선다.','1923년 1월 김상옥, 종로경찰서 투탄 뒤 서울 시내에서 일본 경찰과 총격전'],
+['RAO','軍','만주의 독립군','고향을 떠나 총을 들었다. 지형을 읽고 때를 기다리는 인내가 있다.','1920년 6월 봉오동 전투, 10월 청산리 전투'],
+['RAI','學','동맹휴학 주동 학생','교실 안의 차별을 참지 못한다. 친구들을 모아 교문 밖으로 나간다.','1929년 11월 광주학생항일운동, 전국 학교로 번진 시위'],
+['RWD','詩','골방의 저항 시인','총 대신 문장을 벼린다. 잡혀가도 시를 놓지 않는다.','이육사, 1944년 1월 베이징의 일본 영사관 감옥에서 순국'],
+['RWO','報','상하이 독립신문 기자','바다 건너에서 진실을 찍어 보낸다. 몰래 들어간 신문 한 장이 누군가를 일으킨다고 믿는다.','1919년 8월 상하이에서 창간된 임시정부 기관지 『독립신문』'],
+['RWI','消','일장기를 지운 편집자','안정된 자리를 걸고 사진 한 장을 고친다. 정간이 와도 후회하지 않는다.','1936년 8월 손기정 사진 일장기 말소, 동아일보 무기 정간'],
+['RFD','運','독립자금 운반책','장사꾼의 얼굴로 돈을 나른다. 장부는 두 권, 입은 하나다.','안희제의 부산 백산상회(1914), 1919년 백산무역주식회사로 키워 임시정부 자금을 댔다'],
+['RFO','援','하와이의 독립 후원자','먼 땅에서 번 품삯을 고국으로 보낸다. 직접 싸우지 못해도 돈줄은 끊기지 않게 한다.','미주·하와이 한인들, 대한인국민회 등을 통해 독립의연금 모금'],
+['RFI','産','물산장려운동 상인','사고파는 일로 맞선다. 조선 무명을 진열장 맨 앞에 둔다.','1920년 평양, 1923년 1월 서울에서 조선물산장려회 창립, 토산품 애용 운동'],
+['RSD','通','연통제 비밀 연락원','낮에는 평범한 이웃, 밤에는 임시정부 문서를 전한다. 아는 것을 묻어 두는 법을 안다.','1919년 임시정부 연통제·교통국, 국내와 상하이를 잇던 비밀 행정망'],
+['RSO','交','임시정부 외교관','세계를 설득하는 쪽을 택한다. 여러 언어로 조선의 사정을 알린다.','1919년 김규식, 파리강화회의에 독립 청원서를 냈으나 정식 회의 참석은 막혔다'],
+['RSI','合','신간회 조직가','생각이 다른 사람들을 한자리에 모은다. 합법의 틀을 빌려 전국에 지회를 세운다.','1927년 좌우 합작 단체 신간회 창립, 1931년 해소'],
+['MAD','聲','장터의 만세꾼','평소엔 조용히 살지만 그날만은 목청을 높였다. 이름은 남지 않아도 함성은 남았다.','1919년 3·1운동, 장날에 맞춰 전국 장터에서 만세 시위가 이어졌다'],
+['MAO','耕','간도의 개척 농민','살길을 찾아 국경을 넘었다. 언 땅을 갈고 학교와 마을을 세운다.','1910~30년대 많은 조선인이 간도·만주로 옮겨 가 농사를 지었다'],
+['MAI','避','징용을 피한 청년','끌려가지 않으려고 산으로 숨는다. 맞서지도 따르지도 않고 살아남는 쪽을 고른다.','전쟁 말기 징용·징병을 피해 몸을 숨긴 사람이 많았다'],
+['MWD','歌','유성기 시대의 가수','사람들의 설움을 노래로 달랜다. 무대는 어디든 서지만 마음은 고향에 있다.','1935년 이난영 「목포의 눈물」, 유성기 음반으로 크게 유행'],
+['MWO','留','도쿄 유학생','새 학문과 새 옷에 끌린다. 모던한 거리에서 조선의 앞날을 고민한다.','1919년 2월 8일 도쿄 유학생들이 3·1운동보다 먼저 독립선언서를 발표'],
+['MWI','削','검열 속 신문기자','쓰고 싶은 말의 절반은 지워진다. 그래도 행간에 남길 수 있는 만큼 남긴다.','총독부 검열로 기사가 깎였고, 1940년 8월 조선·동아일보 강제 폐간'],
+['MFD','布','종로 포목상','장부와 손님 사이에서 하루를 산다. 북촌 상권을 지키는 게 내 몫이다.','조선인 상권 종로(북촌)와 일본인 상권 혼마치(남촌)가 갈라져 있었다'],
+['MFO','橋','국경의 보따리상','압록강을 오가며 물건과 소문을 나른다. 어느 편이든 장사는 계속된다.','1911년 11월 압록강 철교 준공, 신의주와 안둥(지금의 단둥)을 이었다'],
+['MFI','簿','생계형 면서기','식구를 먹여 살리려 관청 책상에 앉았다. 시키는 일은 하지만 마음은 편하지 않다.','면 단위 말단 행정 실무는 조선인 서기들이 많이 맡았다'],
+['MSD','茶','경성 다방 주인','문인, 학생, 형사까지 한 탁자 건너에 앉는다. 많이 듣고 적게 말한다.','1933년 시인 이상이 종로에 다방 「제비」를 열었다'],
+['MSO','譯','경계의 통역사','여러 나라 말을 한다. 말을 옮기다 보면 어느 쪽의 비밀도 손에 쥐게 된다.','만주에서는 조선인이 일본어·중국어 통역을 맡는 일이 잦았다'],
+['MSI','名','창씨개명을 미룬 사람','버틸 수 있는 데까지 버틴다. 큰소리는 내지 않지만 이름만은 쉽게 내주지 않는다.','1940년 창씨개명 시행, 신고 기한 6개월 동안 약 80%가 신고했다'],
+['CAD','刑','고등계 형사','같은 말을 쓰는 사람을 쫓는다. 출세를 위해 동포를 취조실로 데려간다. 일제 앞잡이의 전형.','1949년 반민특위가 고문 경찰들을 체포했으나 상당수가 풀려났다'],
+['CAO','討','간도특설대원','만주국 제복을 입고 항일 부대를 쫓는다.','1938년 만주국 간도특설대 창설, 조선인 중심으로 항일 무장세력 토벌'],
+['CAI','憲','헌병보조원','일본 헌병 곁에서 길을 안내하고 마을을 단속한다.','1908년 헌병보조원 제도, 의병 진압과 무단통치의 손발이 되었다'],
+['CWD','畵','친일 예술가','재능을 전쟁 선전에 쓴다. 붓과 무대는 화려하지만 내용은 총독부의 것이다.','전쟁 말기 「결전미술전」·「반도총후미술전」 등 전쟁을 미화하는 전람회가 열렸다'],
+['CWO','慰','황군 위문단 연예인','전선까지 가서 일본군을 위해 노래하고 춤춘다.','중일전쟁 뒤 조선 연예인들이 중국 전선 위문 공연에 나섰다'],
+['CWI','勸','학병 권유 연사','이름난 지식인으로서 청년들에게 전쟁터로 가라고 연설한다.','1943년 학병제 시행, 여러 문인·교육자가 권유 강연과 기고에 나섰다'],
+['CFD','獻','비행기 헌납 부호','재산으로 충성을 증명한다. 국방헌금과 비행기 헌납으로 신문에 이름을 올린다.','중일전쟁 뒤 국방헌금과 비행기 헌납 운동이 벌어졌다'],
+['CFO','納','만주 군납업자','전쟁이 곧 대목이다. 일본군에 물자를 대고 큰돈을 번다.','1932년 만주국 수립 뒤 군수 납품으로 부를 쌓은 조선인 사업가도 있었다'],
+['CFI','租','동척 마름','일본 회사의 땅을 관리하며 소작인에게 높은 소작료를 거둔다.','1908년 동양척식주식회사 설립, 조선 농민의 땅과 소작료를 장악했다'],
+['CSD','班','감시하는 애국반장','이웃 열 집 사정을 꿰고, 공출과 동원을 앞장서 챙긴다.','1938년 국민정신총동원 조선연맹, 10호 안팎 단위로 애국반 조직'],
+['CSO','諜','상하이의 밀정','동지인 척 다가가 정보를 넘긴다. 독립운동가들이 가장 경계한 얼굴이다.','『백범일지』 등에 상하이 독립운동 조직에 숨어든 밀정 이야기가 남아 있다'],
+['CSI','參','중추원 참의','총독부 자문 기구에 앉아 식민 통치에 이름을 빌려준다. 친일 부역자의 상층부.','조선총독부 중추원, 친일 조선인 유력자들이 참의로 임명되었다']
+];
+// 문항: [연도, 상황, [[선택지, 점수코드]...]]  점수코드: 입장 R/M/C · 수단 A/W/F/S · 무대 D/O/I
+// 제1부(공통 5문항)로 입장을 가르고, 제2부는 입장별 5문항, 마지막은 가장 가까운 두 유형 사이의 갈림길.
+const COMMON=[
+['1919. 3.','장날, 태극기를 든 사람들이 장터로 몰려온다.',[['맨 앞에서 만세를 부른다','R'],['뒤에서 따라 외치다 순사가 보이면 슬쩍 빠진다','M'],['밤새 태극기를 더 찍어 몰래 돌린다','R'],['순사 편에 서서 앞장선 사람을 붙잡는다','C']]],
+['1919. 4.','상하이에 임시정부가 섰다는 소문이 돈다.',[['짐을 꾸려 상하이로 떠난다','R'],['반갑지만 식구가 먼저다. 소식만 챙긴다','M'],['일본 영사관에 상하이 사정을 전해 주고 돈을 받는다','C'],['여기 남아 국내 연락을 맡겠다고 한다','R']]],
+['','밤늦게 낯선 손님이 묵직한 보따리를 맡기며 "상하이로 갈 것"이라 한다.',[['겁이 난다. 정중히 돌려보낸다','M'],['다음 날 아침 경찰서로 간다','C'],['장사꾼 행세로 다음 장날 넘겨주겠다고 한다','R'],['묻지 않고 마루 밑에 숨겨 준다','M']]],
+['1940.','창씨개명 신고 기한이 다가온다.',[['가장 먼저 일본식 이름을 신고하고 이웃에게도 권한다','C'],['끝까지 신고하지 않는다','R'],['기한 마지막 날까지 미루다 신고한다','M'],['신고하고 출셋길에 도움이 되길 바란다','C']]],
+['1943. 11.','학병 권유 강연의 연사로 나와 달라는 요청이 왔다.',[['병을 핑계로 시골에 숨는다','M'],['연단에 올라 "천황을 위해 전장으로 가라"고 외친다','C'],['끌려가더라도 탈출해 광복군을 찾아간다','R'],['거절하고, 피할 길을 아는 이들에게 몰래 알려 준다','R']]]
+];
+const BR={
+R:[
+['1919. 11.','만주 지린에서 의열단이 결성됐다. 단원이 찾아와 함께하자고 한다.',[['폭탄을 품고 경성으로 들어가겠다','AD'],['격문과 선전문을 쓰겠다','W'],['뒤에서 자금줄을 대겠다','F'],['국내 연락책을 맡겠다','SD']]],
+['1920.','봉오동·청산리 승전 소식이 들려온다.',[['만주로 건너가 독립군에 합류한다','AO'],['승전 소식을 몰래 찍어 국내에 퍼뜨린다','WD'],['군자금 모금에 나선다','FO'],['다니는 학교에서 비밀 독서회를 꾸린다','SI']]],
+['1927.','좌우가 함께하는 합법 단체 신간회가 생겼다.',[['고향에 지회를 만들러 내려간다','SI'],['합법은 한계가 있다. 무장 투쟁 쪽으로 간다','AO'],['기관지와 신문에 글을 싣는다','WI'],['내 가게를 지회 모임 장소로 내준다','FI']]],
+['1932. 4.','상하이 훙커우 공원에서 윤봉길이 폭탄을 던졌다. 임시정부가 상하이를 떠나야 한다.',[['임시정부를 따라 피란길에 오른다','O'],['국내에 남아 비밀 조직을 지킨다','SD'],['학교·신문사 같은 자리에서 버티며 사람을 키운다','I'],['피란 자금을 마련해 보낸다','FO']]],
+['','붙잡혀 서대문형무소에 갇혔다. 심문관이 동지 이름을 대라고 한다.',[['끝까지 입을 닫는다','S'],['감방 벽에 몰래 시를 새긴다','W'],['탈옥할 기회를 노린다','A'],['나가면 가게부터 다시 열어 자금을 모으겠다고 다짐한다','F']]]
+],
+M:[
+['1930년대','경성에 "모던"이 밀려온다. 가장 끌리는 것은?',[['유성기 음반과 극장 무대','WD'],['현해탄 건너 도쿄 유학','WO'],['종로 상점가의 장사','FD'],['다방에 앉아 세상 소문 듣기','SD']]],
+['','먹고살 길을 정해야 한다.',[['면사무소 서기 시험을 본다','FI'],['간도로 떠나 땅을 일군다','AO'],['신문사 기자가 된다','WI'],['일본어·중국어를 익혀 통역 일을 한다','SO']]],
+['1937.','중일전쟁이 터지고 신사참배가 강요된다.',[['몸이 아프다며 빠진다','AD'],['참배를 칭찬하는 기사를 쓰라는 지시에 펜을 멈칫한다','WI'],['장사에 지장 없게 대충 따른다','FD'],['따르는 척하며 사람들 속내를 살핀다','S']]],
+['1939.','국민징용령이 공포되고 마을에 명단이 돈다.',[['산속으로 숨는다','AI'],['국경 너머 만주로 떠난다','O'],['면사무소 연줄로 명단에서 빼 달라 부탁한다','FI'],['통역 자리를 얻어 끌려가는 것만은 피한다','SO']]],
+['1945. 8. 14.','해방 전날 밤. 끝까지 지키고 싶었던 것 하나는?',[['식구와 땅','D'],['노래와 글','W'],['가게와 장부','F'],['내 이름','I']]]
+],
+C:[
+['1910년대','헌병이 칼을 차고 다니는 시절. 출셋길을 고른다면?',[['헌병보조원 모집에 지원한다','AI'],['총독부 유력자에게 줄을 대 중추원을 노린다','SI'],['동양척식주식회사 땅의 마름이 된다','FI'],['총독 정치를 칭송하는 글을 써서 이름을 알린다','WI']]],
+['1930년대','만주국이 세워지고 "만주 붐"이 분다.',[['간도특설대에 들어가 항일 부대를 쫓는다','AO'],['일본군 군납으로 한몫 잡는다','FO'],['상하이 독립운동가들 사이에 동지인 척 섞여 든다','SO'],['황군 위문 공연단을 따라 전선을 돈다','WO']]],
+['1938.','국민정신총동원 조선연맹이 꾸려진다. 내가 맡을 자리는?',[['애국반장이 되어 이웃 열 집을 살핀다','SD'],['고등계 형사로 "불령선인"을 잡는다','AD'],['비행기 헌납금을 내고 신문에 이름을 올린다','FD'],['전쟁을 미화하는 전람회에 그림을 낸다','WD']]],
+['','동포들이 뒤에서 손가락질한다. 드는 생각은?',[['힘 있는 쪽에 서는 게 현명한 거다','S'],['다들 먹고살려고 하는 일 아닌가','F'],['내 손으로 잡아들이면 그만이다','A'],['예술은 예술일 뿐이다','W']]],
+['1949. 1.','반민족행위특별조사위원회가 활동을 시작했다.',[['예전 서류와 장부부터 불태운다','SI'],['일본이나 만주로 몸을 피한다','O'],['돈과 연줄로 해결해 본다','FD'],['예전 위세로 버틴다','AD']]]
+]};
+const TOTAL=COMMON.length+5+1;
+// 동지(협력 유형은 한패)·천적: 유형코드:동지,천적
+const PAIR=Object.fromEntries('RAD:RFD,CAD RAO:MAO,CAO RAI:RSI,CWI RWD:MWI,CWD RWO:RSO,CSO RWI:RWD,CSI RFD:RSD,CSD RFO:RSO,CFO RFI:MFD,CFI RSD:RFD,CAD RSO:RFO,CSO RSI:RAI,CSI MAD:RSD,CAI MAO:RAO,CAO MAI:MFI,CSD MWD:MSD,CWO MWO:RWO,CWI MWI:RWI,CSI MFD:RFI,CFD MFO:MSO,CAI MFI:MAI,CSD MSD:MWD,CAD MSO:MFO,CSO MSI:MFI,CSD CAD:CSD,RAD CAO:CFO,RAO CAI:CFI,MAD CWD:CWO,RWD CWO:CWD,MWD CWI:CSI,RAI CFD:CSI,RFD CFO:CAO,RFO CFI:CAI,RFI CSD:CAD,RSD CSO:CAD,RSO CSI:CFD,RSI'.split(' ').map(s=>{const[k,v]=s.split(':');return[k,v.split(',')]}));
+const tOf=c=>T.find(x=>x[0]==c);
+const SITE=/^https?:$/.test(location.protocol)?(location.host+location.pathname).replace(/index\.html$/,'').replace(/\/$/,''):'';
+
+const app=document.getElementById('app');
+let name='',hist=[],qi=0,imgURL=null,finalQ=null;
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function intro(){
+  app.innerHTML=`<p class="eyebrow">1910 — 1945 · 성향 테스트</p>
+  <canvas class="hero" id="hero" width="1040" height="440" aria-hidden="true"></canvas>
+  <h1>그 시절,<br>나는 누구였을까</h1>
+  <p class="lead">실제 기록에 남은 장면 앞에서 고르다 보면 길이 갈라져요. 제1부의 선택이 제2부에서 만날 장면을 바꾸고, 마지막 갈림길에서 일제강점기를 산 사람들 36가지 얼굴 가운데 하나가 정해져요. 모두 ${TOTAL}문항이고, 결과는 인스타 스토리 크기 이미지로 저장할 수 있어요.</p>
+  <label class="f" for="nm">기록카드에 적을 이름 (비워 두면 무명씨)<input type="text" id="nm" maxlength="8" placeholder="예: 홍길동"></label>
+  <button class="btn" id="go">기록 시작</button>
+  <p class="note">재미로 보는 테스트예요. 실존 인물이나 그 후손에 대한 평가가 아니고, 결과가 그 사람의 됨됨이를 말하지도 않아요.</p>`;
+  const hc=document.getElementById('hero');scene(hc.getContext('2d'),0,0,1040,440,'RAD',cols());
+  document.getElementById('go').onclick=()=>{name=document.getElementById('nm').value.trim();hist=[];qi=0;finalQ=null;ask()};
+}
+
+function tally(n){
+  const s={};
+  hist.slice(0,n).forEach((h,i)=>{for(const ch of h.q[2][h.i][1])s[ch]=(s[ch]||0)+1+i*0.01});
+  return s;
+}
+const pick=(s,k)=>k.split('').reduce((b,c)=>(s[c]||0)>(s[b]||0)?c:b);
+const stance=()=>pick(tally(COMMON.length),'RMC');
+function ranked(s){return T.map(t=>[t,(s[t[0][0]]||0)*1.5+(s[t[0][1]]||0)+(s[t[0][2]]||0)]).sort((a,b)=>b[1]-a[1])}
+
+function getQ(i){
+  if(i<COMMON.length)return COMMON[i];
+  if(i<TOTAL-1)return BR[stance()][i-COMMON.length];
+  if(!finalQ){
+    const r=ranked(tally(TOTAL-1)).slice(0,2).map(x=>x[0]);
+    if(Math.random()<.5)r.reverse();
+    finalQ=['마지막 갈림길','두 갈래 길이 남았다. 어느 쪽이 더 나에 가까운가?',r.map(t=>[t[3],'T'+t[0]])];
+  }
+  return finalQ;
+}
+
+function ask(){
+  const q=getQ(qi),[yr,txt,opts]=q;
+  const part=qi<COMMON.length?'제1부 · 그날의 선택':qi<TOTAL-1?`제2부 · ${ST[stance()]}의 길`:'마지막 갈림길';
+  app.innerHTML=`<div class="prog"><span>${part}</span><span>${qi+1} / ${TOTAL}</span></div>
+  <div class="bar"><i style="width:${qi/TOTAL*100}%"></i></div>
+  <div class="q">${yr&&qi<TOTAL-1?`<div class="yr">${yr}</div>`:''}<h2>${esc(txt)}</h2></div>
+  <div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o[0])}</button>`).join('')}</div>
+  ${qi?'<button class="btn ghost" id="back">이전 문항</button>':''}`;
+  app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    hist[qi]={q,i:+b.dataset.i};hist.length=qi+1;finalQ=qi==TOTAL-1?finalQ:null;qi++;
+    qi<TOTAL?ask():result()});
+  const bk=document.getElementById('back');if(bk)bk.onclick=()=>{qi--;if(qi<TOTAL-1)finalQ=null;ask()};
+  window.scrollTo(0,0);
+}
+
+async function result(){
+  const last=hist[TOTAL-1],code=last.q[2][last.i][1].slice(1),s=tally(TOTAL-1);
+  const t=T.find(x=>x[0]==code),st=code[0];
+  const tot=['R','M','C'].reduce((a,k)=>a+(s[k]||0),0)||1;
+  const pct=k=>Math.round((s[k]||0)/tot*100);
+  const [ally,foe]=PAIR[code].map(tOf),allyL=code[0]=='C'?'한패':'동지';
+  let py0=0;const path=hist.slice(0,TOTAL-1).map((x,i)=>{const m=(x.q[0]||'').match(/\d{4}/);if(m)py0=+m[0];return [x.q[0],x.q[2][x.i][0],py0,i]}).sort((a,b)=>a[2]-b[2]||a[3]-b[3]);
+  app.innerHTML=`<p class="eyebrow">기록 결과 · ${ST[st]} · ${MO[code[1]]} · ${AR[code[2]]}</p>
+  <div class="res"><img id="shot" alt="${esc(t[2])} 결과 카드"></div>
+  <div class="row"><button class="btn" id="share" hidden>스토리로 공유</button><button class="btn" id="save" hidden>이미지 저장</button></div>
+  <div class="row"><button class="btn ghost" id="copy">결과 문구 복사</button><button class="btn ghost" id="link">테스트 링크 복사</button></div>
+  <p class="toast" id="msg">이미지를 길게 눌러도 저장돼요.</p>
+  <div class="pair"><div><em>${allyL}</em><b>${ally[2]}</b>${ally[3]}</div><div class="foe"><em>천적</em><b>${foe[2]}</b>${foe[3]}</div></div>
+  <p class="note">친구 결과가 내 ${allyL}나 천적이라면 스토리에 태그해 보세요.</p>
+  <h3>내가 걸어온 길</h3>
+  <ol class="path">${path.map(([y,a])=>`<li><span>${y||'그 무렵'}</span>${esc(a)}</li>`).join('')}<li><span>마지막 갈림길</span>${esc(t[2])}</li></ol>
+  <div class="axes">${['R','M','C'].map(k=>`<div class="ax ${k=='R'?'r':''}"><b>${ST[k]}</b><span><i style="width:${pct(k)}%"></i></span><em>${pct(k)}%</em></div>`).join('')}</div>
+  <details><summary>36가지 유형 모두 보기</summary>
+  <p class="note" style="margin-top:8px">입장 3가지(저항·경계·협력) × 수단 4가지(몸·글과 예술·돈과 물자·정보와 조직) × 무대 3가지(조선 안·국경 너머·제도 안)를 곱해 36가지예요. 제1부가 입장을, 제2부가 수단과 무대를 가르고, 마지막 갈림길에서 가장 가까운 두 유형 중 하나를 골라요.</p>
+  <div class="grid">${T.map(x=>`<div class="${x[0][0]}${x[0]==code?' me':''}"><em>${x[1]} · ${ST[x[0][0]]}</em>${x[2]}</div>`).join('')}</div></details>
+  <button class="btn ghost" id="again">다시 하기</button>
+  <p class="note">기록 한 줄은 널리 알려진 역사적 사실을 짧게 줄인 거예요. 자세한 내용은 한국민족문화대백과사전, 국가보훈부 공훈전자사료관 등에서 확인해 보세요. 그 시절을 산 대부분은 이름 없이 기록 밖에 남은 사람들이었어요.</p>`;
+  document.getElementById('again').onclick=intro;
+  const msg=document.getElementById('msg');
+  document.getElementById('copy').onclick=async()=>{
+    const txt=`그 시절 나는 「${t[2]}」(${ST[st]}·${MO[code[1]]}·${AR[code[2]]})\n${t[3]}\n${allyL}: ${ally[2]} / 천적: ${foe[2]}\n기록: ${t[4]}`;
+    try{await navigator.clipboard.writeText(txt);msg.textContent='결과 문구를 복사했어요.'}catch(e){msg.textContent=txt}
+  };
+  const blob=await draw(t,code,ally,foe,allyL);
+  const img=document.getElementById('shot');img.src=imgURL;
+  const sb=document.getElementById('save'),fn=`그시절나는_${t[2]}.png`;
+  sb.hidden=false;sb.onclick=()=>{const a=document.createElement('a');a.href=imgURL;a.download=fn;document.body.appendChild(a);a.click();a.remove();msg.textContent='저장했어요. 스토리에 올려 보세요.'};
+  try{const file=new File([blob],fn,{type:'image/png'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){const sh=document.getElementById('share');sh.hidden=false;
+      sh.onclick=async()=>{try{await navigator.share({files:[file],title:'그 시절, 나는 누구였을까'});}catch(e){}}}}catch(e){}
+  const lb=document.getElementById('link');lb.onclick=async()=>{try{await navigator.clipboard.writeText(location.href.split('#')[0]);msg.textContent='테스트 링크를 복사했어요.'}catch(e){msg.textContent=location.href}};
+}
+
+function wrap(c,text,x,y,maxW,lh,maxLines){
+  const lines=split(c,text,maxW);
+  lines.slice(0,maxLines).forEach((l,i)=>c.fillText(l,x,y+i*lh));
+  return y+Math.min(lines.length,maxLines)*lh;
+}
+function split(c,text,maxW){
+  const words=text.split(' ');let line='',lines=[];
+  for(const w of words){
+    const test=line?line+' '+w:w;
+    if(c.measureText(test).width<=maxW){line=test;continue}
+    if(line)lines.push(line);
+    if(c.measureText(w).width>maxW){let part='';for(const ch of w){if(c.measureText(part+ch).width>maxW){lines.push(part);part=ch}else part+=ch}line=part}else line=w;
+  }
+  if(line)lines.push(line);
+  return lines;
+}
+
+function cols(){const css=getComputedStyle(document.documentElement),v=k=>css.getPropertyValue(k).trim();
+  return {night:v('--night'),paper:v('--paper'),ink:v('--paper-ink'),seal:v('--seal'),light:v('--ink'),dim:v('--dim')}}
+
+// 목판화풍 일러스트: 무대(배경) × 수단(소품)
+function scene(c,x,y,w,h,code,k){
+  const mo=code[1],ar=code[2],g=y+h*.74;
+  c.save();c.beginPath();c.rect(x,y,w,h);c.clip();
+  c.fillStyle=k.paper;c.fillRect(x,y,w,h);
+  c.strokeStyle=k.ink;c.lineCap='round';c.lineJoin='round';
+  for(let i=0;i<15;i++){const yy=y+12+i*(h*.62/15);c.lineWidth=.8+i*.3;c.beginPath();c.moveTo(x,yy);
+    for(let xx=0;xx<=w;xx+=30)c.lineTo(x+xx,yy+Math.sin((xx+i*53)/80)*2.2);c.stroke()}
+  c.fillStyle=k.paper;c.beginPath();c.arc(x+w*.6,y+h*.2,h*.1,0,7);c.fill();
+  c.strokeStyle=k.ink;c.lineWidth=3;c.stroke();
+  const line=(a,b,cc,d,lw,col)=>{c.strokeStyle=col;c.lineWidth=lw;c.beginPath();c.moveTo(a,b);c.lineTo(cc,d);c.stroke()};
+  const outFill=(f,fill,lw)=>{c.beginPath();f();c.lineWidth=lw||9;c.strokeStyle=k.paper;c.stroke();c.fillStyle=fill;c.fill()};
+  c.fillStyle=k.ink;
+  if(ar=='D'){
+    c.beginPath();c.moveTo(x,g);[[0,.5],[.14,.38],[.3,.48],[.48,.33],[.66,.46],[.82,.37],[1,.47]].forEach(([a,b])=>c.lineTo(x+w*a,y+h*b));c.lineTo(x+w,g);c.fill();
+    [[.5,.2,.2],[.72,.24,.25],[.94,.18,.19]].forEach(([cx,rw,rh])=>{cx=x+w*cx;rw=w*rw;rh=h*rh;
+      c.fillRect(cx-rw*.32,g-rh*.42,rw*.64,rh*.42);
+      outFill(()=>{c.moveTo(cx-rw*.5,g-rh*.62);c.quadraticCurveTo(cx-rw*.28,g-rh*.62,cx-rw*.22,g-rh);c.lineTo(cx+rw*.22,g-rh);
+        c.quadraticCurveTo(cx+rw*.28,g-rh*.62,cx+rw*.5,g-rh*.62);c.quadraticCurveTo(cx,g-rh*.38,cx-rw*.5,g-rh*.62);c.closePath()},k.ink,6);
+      for(let t=-3;t<=3;t++)line(cx+t*rw*.06,g-rh*.92,cx+t*rw*.09,g-rh*.58,2,k.paper);
+      line(cx-rw*.12,g,cx-rw*.12,g-rh*.3,3,k.paper);line(cx+rw*.12,g,cx+rw*.12,g-rh*.3,3,k.paper)});
+  }else if(ar=='O'){
+    c.beginPath();c.moveTo(x,g-h*.06);[[.2,-.1],[.45,-.07],[.7,-.12],[1,-.06]].forEach(([a,b])=>c.lineTo(x+w*a,g+h*b));c.lineTo(x+w,g);c.lineTo(x,g);c.fill();
+    const yb=g-h*.02,sw=w/3.2;c.fillRect(x,yb-8,w,12);
+    for(let s=0;s<4;s++){const sx=x+w*.05+s*sw;c.strokeStyle=k.ink;c.lineWidth=6;c.beginPath();c.moveTo(sx,yb);
+      c.quadraticCurveTo(sx+sw/2,yb-h*.36,sx+sw,yb);c.stroke();c.lineWidth=3;
+      for(let j=1;j<8;j++){const t1=j/8,px=sx+sw*t1,py=yb-(4*t1*(1-t1))*h*.18;line(px,yb,px,py,3,k.ink);if(j<7){const t2=(j+1)/8;line(px,py,sx+sw*t2,yb,2,k.ink)}}
+      c.fillRect(sx-8,yb,16,h)}
+    c.fillRect(x,g+4,w,h);
+  }else{
+    const bx=x+w*.36,bw=w*.62,bt=g-h*.27,cx=x+w*.67;
+    c.fillRect(bx,bt,bw,g-bt);c.fillRect(cx-w*.07,bt-h*.14,w*.14,h*.14);
+    c.beginPath();c.arc(cx,bt-h*.14,w*.062,Math.PI,0);c.fill();line(cx,bt-h*.14-w*.062,cx,bt-h*.3,4,k.ink);
+    for(let i=0;i<13;i++)if(Math.abs(bx+bw*(i+.5)/13-cx)>w*.06)line(bx+bw*(i+.5)/13,bt+12,bx+bw*(i+.5)/13,g-6,4,k.paper);
+    line(bx,bt+6,bx+bw,bt+6,3,k.paper);
+    for(let i=0;i<3;i++)c.fillStyle=k.paper,c.fillRect(cx-w*.045+i*w*.033,bt-h*.1,w*.016,h*.06);
+    c.fillStyle=k.ink;c.fillRect(x,g,w,h);
+  }
+  c.strokeStyle=k.paper;c.lineWidth=2;for(let i=0;i<9;i++){const yy=g+12+i*9;if(yy>y+h)break;c.beginPath();c.moveTo(x+((i*97)%60),yy);for(let xx=0;xx<w;xx+=70){c.moveTo(x+xx+((i*37)%30),yy);c.lineTo(x+xx+((i*37)%30)+26,yy)}c.stroke()}
+  // 소품
+  const ox=x+w*.22,oy=y+h*.56,s=h*.44;
+  c.save();c.translate(ox,oy);c.rotate(-.1);
+  if(mo=='A'){
+    outFill(()=>{c.moveTo(-s*.08,-s*.02);c.lineTo(s*.08,-s*.02);c.lineTo(s*.045,s*.8);c.lineTo(-s*.045,s*.8);c.closePath()},k.ink);
+    for(let i=1;i<4;i++)line(-s*.07,s*.04*i+s*.02,s*.07,s*.04*i+s*.02,3,k.paper);
+    outFill(()=>{c.moveTo(0,-s*.95);c.bezierCurveTo(s*.38,-s*.55,s*.3,-s*.08,0,-s*.04);c.bezierCurveTo(-s*.3,-s*.08,-s*.38,-s*.5,-s*.06,-s*.7);c.quadraticCurveTo(-s*.02,-s*.82,0,-s*.95)},k.seal);
+    c.beginPath();c.moveTo(0,-s*.55);c.bezierCurveTo(s*.16,-s*.35,s*.12,-s*.12,0,-s*.1);c.bezierCurveTo(-s*.12,-s*.12,-s*.16,-s*.32,0,-s*.55);c.fillStyle=k.paper;c.fill();
+  }else if(mo=='W'){
+    outFill(()=>{c.rect(-s*.15,-s*1.02,s*.3,s*.42)},k.ink);
+    outFill(()=>{c.moveTo(0,s*.68);c.lineTo(s*.28,-s*.08);c.lineTo(s*.2,-s*.6);c.lineTo(-s*.2,-s*.6);c.lineTo(-s*.28,-s*.08);c.closePath()},k.ink);
+    line(0,s*.6,0,-s*.02,4,k.paper);c.beginPath();c.arc(0,-s*.06,s*.065,0,7);c.fillStyle=k.paper;c.fill();
+    for(let i=0;i<3;i++)line(-s*.15,-s*.5+i*s*.06,s*.15,-s*.5+i*s*.06,2,k.paper);
+    c.beginPath();c.arc(0,s*.84,s*.07,0,7);c.fillStyle=k.seal;c.fill();
+  }else if(mo=='F'){
+    outFill(()=>{c.ellipse(0,s*.28,s*.44,s*.38,0,0,7)},k.ink);
+    outFill(()=>{c.moveTo(-s*.08,-s*.06);c.lineTo(-s*.36,-s*.46);c.lineTo(-s*.02,-s*.22);c.closePath();c.moveTo(s*.08,-s*.06);c.lineTo(s*.36,-s*.46);c.lineTo(s*.02,-s*.22);c.closePath()},k.ink,7);
+    c.beginPath();c.arc(0,-s*.08,s*.09,0,7);c.fillStyle=k.ink;c.fill();c.strokeStyle=k.paper;c.lineWidth=4;c.stroke();
+    c.fillStyle=k.paper;for(let i=-2;i<=2;i++)for(let j=0;j<3;j++){const px=i*s*.15+(j%2)*s*.075,py=s*.12+j*s*.15;if((px*px)/(s*s*.15)+((py-s*.28)**2)/(s*s*.11)<1){c.beginPath();c.arc(px,py,s*.028,0,7);c.fill()}}
+    [[s*.42,s*.62],[s*.62,s*.5],[s*.6,s*.74]].forEach(([px,py])=>{outFill(()=>c.arc(px,py,s*.14,0,7),k.seal,7);c.fillStyle=k.paper;c.fillRect(px-s*.04,py-s*.04,s*.08,s*.08)});
+  }else{
+    outFill(()=>{c.rect(-s*.55,-s*.36,s*1.1,s*.74)},k.ink);
+    line(-s*.55,-s*.36,0,s*.06,4,k.paper);line(s*.55,-s*.36,0,s*.06,4,k.paper);
+    line(-s*.55,s*.38,-s*.12,s*.0,3,k.paper);line(s*.55,s*.38,s*.12,s*.0,3,k.paper);
+    outFill(()=>c.arc(0,s*.06,s*.12,0,7),k.seal,6);
+    c.strokeStyle=k.paper;c.lineWidth=3;c.beginPath();c.arc(0,s*.06,s*.07,0,7);c.stroke();
+  }
+  c.restore();c.restore();
+  c.strokeStyle=k.ink;c.lineWidth=3;c.strokeRect(x,y,w,h);
+}
+
+async function draw(t,code,ally,foe,allyL){
+  const D='"Noto Serif KR",serif',B='"Gowun Batang","Noto Serif KR",serif';
+  const all=T.map(x=>x.join('')).join('')+Object.values(STAMP).join('')+'人物記錄그시절나는누구였을까무명씨성명입장수단무대기록번호동지한패천적0123456789';
+  try{await Promise.all([document.fonts.load(`900 40px ${D}`,all),document.fonts.load(`500 40px ${D}`,all),document.fonts.load(`400 40px ${B}`,all+(name||'')),document.fonts.load(`700 40px ${B}`,all+(name||''))])}catch(e){}
+  const W=1080,H=1920,cv=document.createElement('canvas');cv.width=W;cv.height=H;const c=cv.getContext('2d');
+  const k=cols(),pink=k.ink;
+  c.fillStyle=k.night;c.fillRect(0,0,W,H);
+  c.fillStyle=k.dim;c.font=`400 32px ${B}`;c.textAlign='center';c.fillText('1910 — 1945',W/2,150);
+  c.fillStyle=k.light;c.font=`900 62px ${D}`;c.fillText('그 시절, 나는 누구였을까',W/2,235);
+  const x0=80,y0=290,cw=920,ch=1440,L=x0+70,R=x0+cw-70,TW=R-L;
+  c.fillStyle='rgba(0,0,0,.35)';c.fillRect(x0+10,y0+16,cw,ch);
+  c.fillStyle=k.paper;c.fillRect(x0,y0,cw,ch);
+  c.strokeStyle=pink;c.lineWidth=3;c.strokeRect(x0+24,y0+24,cw-48,ch-48);c.lineWidth=1;c.strokeRect(x0+34,y0+34,cw-68,ch-68);
+  c.fillStyle=pink;c.textAlign='left';c.font=`500 32px ${D}`;c.fillText('人 物 記 錄',L,y0+100);
+  c.textAlign='right';c.font=`400 28px ${B}`;c.fillText(`기록 번호 ${String(T.indexOf(t)+1).padStart(2,'0')} / 36`,R,y0+100);
+  c.fillRect(L,y0+122,TW,2);
+  // 일러스트
+  const n=(f,s,mw,mx)=>{c.font=f;return Math.min(split(c,s,mw).length,mx)};
+  const spare=(2-n(`900 70px ${D}`,t[2],TW-40,2))*84+(3-n(`400 34px ${B}`,t[3],TW,3))*52+(3-n(`400 29px ${B}`,t[4],TW,3))*44;
+  const py=y0+150,ph=Math.min(440+spare,640);scene(c,L,py,TW,ph,code,k);
+  c.fillStyle=k.paper;c.fillRect(R-118,py+18,100,100);c.strokeStyle=pink;c.lineWidth=3;c.strokeRect(R-118,py+18,100,100);
+  c.fillStyle=pink;c.textAlign='center';c.font=`900 72px ${D}`;c.fillText(t[1],R-68,py+94);
+  c.save();c.translate(R-140,py+ph-6);c.rotate(-0.17);c.strokeStyle=k.seal;c.fillStyle=k.seal;c.globalAlpha=.9;
+  c.fillStyle=k.paper;c.fillRect(-110,-60,220,120);c.fillStyle=k.seal;
+  c.lineWidth=7;c.strokeRect(-110,-60,220,120);c.lineWidth=2;c.strokeRect(-98,-48,196,96);
+  c.font=`900 58px ${D}`;c.textAlign='center';c.fillText(STAMP[code[0]],0,22);c.restore();
+  // 글
+  c.textAlign='left';c.fillStyle=pink;c.font=`900 70px ${D}`;
+  let y=wrap(c,t[2],L,py+ph+100,TW-40,84,2);
+  c.font=`400 30px ${B}`;c.globalAlpha=.75;c.fillText(`${name||'무명씨'} · ${ST[code[0]]} · ${MO[code[1]]} · ${AR[code[2]]}`,L,y-14);c.globalAlpha=1;
+  c.font=`400 34px ${B}`;y=wrap(c,t[3],L,y+52,TW,52,3);
+  y+=4;c.fillRect(L,y-20,TW,2);
+  [[allyL,ally[2],pink],['천적',foe[2],k.seal]].forEach(([lb,nm,col],i)=>{const yy=y+34+i*54;
+    c.fillStyle=col;c.font=`700 28px ${B}`;c.fillText(lb,L,yy);c.fillStyle=pink;c.font=`700 34px ${B}`;c.fillText(nm,L+100,yy)});
+  y+=110;c.fillStyle=pink;c.fillRect(L,y,TW,2);
+  c.font=`700 28px ${B}`;c.fillStyle=k.seal;c.fillText('그 시절 기록',L,y+48);
+  c.fillStyle=pink;c.font=`400 29px ${B}`;wrap(c,t[4],L,y+94,TW,44,3);
+  c.textAlign='center';c.fillStyle=k.dim;c.font=`400 30px ${B}`;c.fillText(SITE?`나도 해보기 · ${SITE}`:'나도 해보기',W/2,1800);
+  c.font=`400 24px ${B}`;c.fillText('재미로 보는 테스트 · 실존 인물에 대한 평가가 아니에요',W/2,1872);
+  return new Promise(r=>cv.toBlob(b=>{if(imgURL)URL.revokeObjectURL(imgURL);imgURL=URL.createObjectURL(b);r(b)},'image/png'));
+}
+intro();
+</script>
+
+</body>
+</html>
